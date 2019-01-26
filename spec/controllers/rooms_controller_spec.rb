@@ -44,7 +44,7 @@ RSpec.describe RoomsController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      room = Room.create! valid_attributes
+      Room.create! valid_attributes
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
     end
@@ -62,7 +62,9 @@ RSpec.describe RoomsController, type: :controller do
     context 'with valid params' do
       it 'creates a new Room' do
         expect do
-          post :create, params: { room: valid_attributes }, session: valid_session
+          post :create,
+               params: { room: valid_attributes },
+               session: valid_session
         end.to change(Room, :count).by(1)
       end
 
@@ -76,7 +78,9 @@ RSpec.describe RoomsController, type: :controller do
 
     context 'with invalid params' do
       it 'renders a JSON response with errors for the new room' do
-        post :create, params: { room: invalid_attributes }, session: valid_session
+        post :create,
+             params: { room: invalid_attributes },
+             session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
@@ -91,7 +95,9 @@ RSpec.describe RoomsController, type: :controller do
 
       it 'updates the requested room' do
         room = Room.create! valid_attributes
-        put :update, params: { id: room.to_param, room: new_attributes }, session: valid_session
+        put :update,
+            params: { id: room.to_param, room: new_attributes },
+            session: valid_session
         room.reload
         skip('Add assertions for updated state')
       end
@@ -99,7 +105,9 @@ RSpec.describe RoomsController, type: :controller do
       it 'renders a JSON response with the room' do
         room = Room.create! valid_attributes
 
-        put :update, params: { id: room.to_param, room: valid_attributes }, session: valid_session
+        put :update,
+            params: { id: room.to_param, room: valid_attributes },
+            session: valid_session
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to eq('application/json')
       end
@@ -109,7 +117,9 @@ RSpec.describe RoomsController, type: :controller do
       it 'renders a JSON response with errors for the room' do
         room = Room.create! valid_attributes
 
-        put :update, params: { id: room.to_param, room: invalid_attributes }, session: valid_session
+        put :update,
+            params: { id: room.to_param, room: invalid_attributes },
+            session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json')
       end
