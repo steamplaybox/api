@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SteamApiService
   def initialize(steam_id:, route:)
     @steam_id = steam_id
@@ -22,6 +24,7 @@ class SteamApiService
   end
 
   def url(endpoint)
-    "#{base_url}/#{route}/#{endpoint}/?key=#{api_key}&steamid=#{steam_id}&format=json"
+    "#{base_url}/#{route}/#{endpoint}/?key=#{api_key}&steamid=#{steam_id}" \
+    '&format=json'
   end
 end

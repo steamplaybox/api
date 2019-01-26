@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ISteamUser < SteamApiService
   def initialize(steam_id:)
     super(steam_id: steam_id, route: 'ISteamUser')

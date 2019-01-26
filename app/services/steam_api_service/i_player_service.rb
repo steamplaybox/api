@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IPlayerService < SteamApiService
   def initialize(steam_id:)
     super(steam_id: steam_id, route: 'IPlayerService')
@@ -13,7 +15,7 @@ class IPlayerService < SteamApiService
 
   def recently_played
     params = {
-        endpoint: 'GetRecentlyPlayedGames/v0001'
+      endpoint: 'GetRecentlyPlayedGames/v0001'
     }
 
     make_request(params)
