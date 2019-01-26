@@ -2,7 +2,7 @@ services:
   - mongodb
 cache: bundler
 before_script:
-  - sleep 15
+  - sleep 10
   - cp config/mongoid.yml.travis config/mongoid.yml
 dist: trusty
 language: ruby
