@@ -1,0 +1,31 @@
+version: '3'
+services:
+  db:
+    image: mongo:latest
+    environment:
+      - MONGO_USER="playbox"
+      - MONGO_PASS="playbox"
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/log/db
+    volumes:
+      - ./data/db:/data
+      - ./log/db:/log
+    ports:
+      - 27017:27017
+    command: mongod --smallfiles --logpath=/log/db
+  web:
+    build: .
+    command: sh -c 'bundle exec rails s -p 3000 -b "0.0.0.0"'
+    volumes:
+      - .:/api
+    tmpfs: /api/tmp
+    ports:
+      - "4200:3000"
+    depends_on:
+      - db
+    environment:
+      - RAILS_ENV=development
+      - RAILS_LOG_TO_STDOUT=present
+    env_file:
+      - '.env'
+    restart: always

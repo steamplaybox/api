@@ -1,0 +1,13 @@
+services:
+  - mongodb
+cache: bundler
+before_script:
+  - sleep 15
+  - cp config/mongoid.yml.travis config/mongoid.yml
+dist: trusty
+language: ruby
+rvm:
+  - 2.6.0
+script:
+  - bundle exec rails db:migrate RAILS_ENV=test
+  - bundle exec rspec

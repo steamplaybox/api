@@ -1,0 +1,17 @@
+development:
+  clients:
+    default:
+      database: api_development
+      hosts:
+        - db:27017
+
+test:
+  clients:
+    default:
+      database: api_test
+      hosts:
+        - db:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1
